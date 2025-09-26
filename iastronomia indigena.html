@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Astronomia Indígena — Galeria</title>
+
+<!-- Fontes modernas -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg-1: #071027;    /* deep navy */
+    --bg-2: #0f2946;    /* deep blue */
+    --glass: rgba(255,255,255,0.06);
+    --muted: #cfe6ff;
+    --accent: #ffb56b;  /* warm accent */
+    --accent-2:#e85b4a; /* earthy red */
+    --card-radius:16px;
+    --gap:18px;
+    --maxw:1200px;
+  }
+
+  /* ------ Base ------ */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 500px at 10% 15%, rgba(255,255,255,0.02), transparent),
+                linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 70%);
+    color: #ecf7ff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-y:auto;
+    padding-bottom:60px;
+  }
+
+  /* Animated starfield using layered radial gradients */
+  .starfield {
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,255,255,0.9) 0 0.6px, transparent 0.6px),
+      radial-gradient(circle at 50% 60%, rgba(255,255,255,0.7) 0 0.8px, transparent 0.8px),
+      radial-gradient(circle at 80% 30%, rgba(255,255,255,0.6) 0 0.7px, transparent 0.7px);
+    background-size: 400px 400px, 600px 600px, 300px 300px;
+    opacity:0.12;
+    animation: drift 60s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.02));
+  }
+  @keyframes drift{
+    from{transform: translateY(0) translateX(0)}
+    to{transform: translateY(-120px) translateX(-80px)}
+  }
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:40;
+    backdrop-filter: blur(6px) saturate(1.05);
+    padding:18px 20px;
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    background: linear-gradient(180deg, rgba(7,16,39,0.35), rgba(7,16,39,0.10));
+  }
+  .top{
+    max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .brand{
+    display:flex;gap:14px;align-items:center;
+  }
+  .logomark{
+    width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#102b52,#172e4a);
+    display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03);
+  }
+  .logomark svg{width:34px;height:34px;opacity:0.95}
+  h1{font-size:1.05rem;margin:0;font-weight:700;letter-spacing:0.6px;color:var(--muted)}
+  .tag{font-size:0.82rem;color:rgba(207,230,255,0.7)}
+
+  /* Controls */
+  .controls{display:flex;gap:12px;align-items:center}
+  .search{
+    display:flex;align-items:center;background:var(--glass);padding:8px 10px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+    gap:8px;color:var(--muted);
+  }
+  .search input{background:transparent;border:0;color:var(--muted);outline:none;width:160px}
+  .filters{display:flex;gap:8px;align-items:center}
+  .chip{
+    padding:8px 10px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;
+    transition: all .25s ease;
+  }
+  .chip.active{background:linear-gradient(90deg,rgba(255,181,107,0.12),rgba(232,91,74,0.06));color:var(--accent);box-shadow:0 6px 18px rgba(0,0,0,0.45);border-color:transparent;}
+
+  /* Main layout */
+  main{max-width:var(--maxw);margin:28px auto;padding:0 20px;position:relative;z-index:10}
+  .hero{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);
+  }
+  .hero-left{flex:1}
+  .hero h2{margin:0;font-size:1.6rem;color:var(--accent);letter-spacing:0.3px}
+  .hero p{margin-top:8px;color:rgba(207,230,255,0.9);max-width:640px;line-height:1.5}
+
+  /* subtle tribal decorative line */
+  .tribal-line{
+    height:38px;width:140px;border-radius:8px;background:
+      linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
+    display:flex;align-items:center;justify-content:center;padding:6px;
+  }
+  .tribal-line svg{opacity:0.7}
+
+  /* Grid */
+  .grid{
+    margin-top:22px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap:var(--gap);
+  }
+
+  /* Card: glass + subtle border */
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.015));
+    border-radius: var(--card-radius);
+    border:1px solid rgba(255,255,255,0.03);
+    overflow:hidden;
+    min-height:320px;
+    display:flex;flex-direction:column;
+    box-shadow: 0 6px 18px rgba(3,8,20,0.5);
+    transform: translateY(12px) scale(0.995);
+    opacity:0;
+    transition: transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .35s, opacity .45s;
+  }
+  .card.visible{opacity:1;transform:none}
+  .card:hover{transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 40px rgba(3,8,30,0.6)}
+
+  .visual{
+    height:180px;position:relative;overflow:hidden;background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.18));
+  }
+  .visual img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02) saturate(1.05);transition:transform 1s}
+  .card:hover .visual img{transform:scale(1.08) translateY(-6px)}
+
+  .card-content{padding:14px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .title{font-size:1.05rem;font-weight:600;color:var(--accent)}
+  .meta{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:0.86rem}
+  .desc{color:rgba(207,230,255,0.94);font-size:0.95rem;line-height:1.45;flex:1}
+  .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
+  .btn{
+    padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;transition:all .2s;
+  }
+  .btn.primary{
+    background: linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:#071027;border:0;
+    box-shadow: 0 8px 30px rgba(232,91,74,0.08);
+  }
+
+  /* modal */
+  .modal-back{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60;background:linear-gradient(180deg,rgba(7,10,20,0.6),rgba(7,10,20,0.9))}
+  .modal{
+    width:min(980px,94%);max-height:90vh;overflow:auto;border-radius:12px;padding:18px;background:linear-gradient(180deg,#07122a,#0b2740);
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .modal .row{display:flex;gap:18px;align-items:flex-start}
+  .modal img{width:48%;height:360px;object-fit:cover;border-radius:8px}
+  .md-body{flex:1;color:var(--muted)}
+  .close{background:transparent;border:0;color:var(--muted);font-size:1rem;padding:8px 10px;cursor:pointer}
+
+  /* footer */
+  footer{max-width:var(--maxw);margin:40px auto 60px;padding:12px 20px;color:#bcd6f6;opacity:0.9;text-align:center}
+
+  /* responsive */
+  @media(max-width:860px){
+    .hero{flex-direction:column;gap:12px}
+    .modal .row{flex-direction:column}
+    .modal img{width:100%;height:260px}
+  }
+</style>
+</head>
+<body>
+  <div class="starfield" aria-hidden="true"></div>
+
+  <header>
+    <div class="top">
+      <div class="brand">
+        <div class="logomark" aria-hidden="true">
+          <!-- subtle pattern -->
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#ffb56b" stroke-width="3" fill="none" stroke-linecap="round">
+              <path d="M8 50 L24 28 L40 50 L56 28 L72 50"></path>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <h1>Astronomia Indígena</h1>
+          <div class="tag">Galeria • Saberes do céu</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="search" role="search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="#cfe6ff" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input id="q" placeholder="Pesquisar (ex: Ema, Anta)" aria-label="Pesquisar"/>
+        </div>
+
+        <div class="filters" role="toolbar" aria-label="Filtros">
+          <button class="chip" data-filter-povo="">Todos</button>
+          <button class="chip" data-filter-povo="Tupi-Guarani">Tupi-Guarani</button>
+          <button class="chip" data-filter-povo="Tukano">Tukano</button>
+          <button class="chip" data-filter-tema="Animal">Animais</button>
+          <button class="chip" data-filter-tema="Humano">Humanos</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <h2>Mapeando o céu pelos saberes indígenas</h2>
+        <p>Galeria com representações das constelações (Ema, Anta, Homem Velho, Veado, Cobra, Jaguatirica). Clique para ver detalhes culturais e ilustrações. O design é minimalista, com elementos gráficos inspirados em padrões indígenas.</p>
+      </div>
+      <div class="tribal-line" aria-hidden="true">
+        <svg viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" width="120" height="30">
+          <path d="M4 18 L16 6 L28 18 L40 6 L52 18 L64 6 L76 18 L88 6 L100 18" stroke="#cfe6ff" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="grid" id="grid" aria-live="polite">
+      <!-- Cards injected by JS -->
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modalBack" class="modal-back" aria-hidden="true" role="dialog">
+    <div class="modal" role="document">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-weight:700;color:var(--accent)">Constelação</div>
+        <button id="closeModal" class="close" aria-label="Fechar">✕</button>
+      </div>
+      <div class="row">
+        <img id="modalImg" src="" alt="">
+        <div class="md-body">
+          <h3 id="modalTitle" style="margin-top:0;color:var(--accent)"></h3>
+          <p id="modalPovo" style="color:var(--muted);margin-top:0"></p>
+          <p id="modalDesc" style="margin-top:12px"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <small>Projeto educacional — inspirado em estudos etnoastronômicos. Substitua imagens por arquivos em <code>img/</code> para trabalhar offline.</small>
+  </footer>
+
+<script>
+/* ===== DATA: constelações até onça (use imagens locais em img/*.jpg) ===== */
+const DATA = [
+  {id:'ema', title:'Ema', povo:'Tupi-Guarani', tema:'Animal', img:'img/ema.jpg',
+   desc:'A Ema é mapeada ao longo da Via Láctea em várias tradições Tupi-Guarani. Serve como marcador de plantio e de relações entre estações.'},
+  {id:'anta', title:'Anta', povo:'Tupi-Guarani', tema:'Animal', img:'img/anta.jpg',
+   desc:'A Anta do Norte aparece associada ao “Caminho da Anta” (Via Láctea) e indica épocas de pesca e deslocamento.'},
+  {id:'homem_velho', title:'Homem Velho', povo:'Tukano', tema:'Humano', img:'img/homem_velho.jpg',
+   desc:'Figura ancestral e didática nas narrativas Tukano — associada a rituais e memórias de iniciação.'},
+  {id:'veado', title:'Veado', povo:'Tupi', tema:'Animal', img:'img/veado.jpg',
+   desc:'O Veado conecta práticas de caça e festividades locais; aparece em histórias que relacionam terra e céu.'},
+  {id:'cobra', title:'Cobra', povo:'Tupi', tema:'Animal', img:'img/cobra.jpg',
+   desc:'Representa rios e caminhos; muitas tradições veem padrões serpentiformes na Via Láctea.'},
+  {id:'onça', title:'onça', povo:'Tukano', tema:'Animal', img:'img/onça.jpg',
+   desc:'A onça simboliza astúcia e proteção; aparece em lendas e sinalizações sazonais.'}
+];
+
+/* fallback svg generator for missing images */
+function fallbackSVG(text){
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='480'><rect width='100%' height='100%' fill='%2306112a'/><text x='50%' y='50%' fill='%23ffb56b' font-family='Poppins' font-size='20' text-anchor='middle'>${text}</text></svg>`;
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+/* render grid */
+const grid = document.getElementById('grid');
+function render(items){
+  grid.innerHTML = '';
+  items.forEach((it, idx)=>{
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="visual">
+        <img src="${it.img}" alt="${it.title}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackSVG('Imagem indisponível')}';">
+        <div class="tribal-band" style="position:absolute;bottom:0;left:0;right:0;height:44px"></div>
+      </div>
+      <div class="card-content">
+        <div class="title">${it.title}</div>
+        <div class="meta"><span>${it.povo}</span> · <span>${it.tema}</span></div>
+        <div class="desc">${it.desc}</div>
+        <div class="actions"><button class="btn primary" data-id="${it.id}">Ver mais</button></div>
+      </div>
+    `;
+    grid.appendChild(el);
+    // staggered reveal
+    setTimeout(()=> el.classList.add('visible'), 80*idx);
+  });
+}
+render(DATA);
+
+/* modal logic */
+const modalBack = document.getElementById('modalBack');
+const modalImg = document.getElementById('modalImg');
+const modalTitle = document.getElementById('modalTitle');
+const modalPovo = document.getElementById('modalPovo');
+const modalDesc = document.getElementById('modalDesc');
+const closeModal = document.getElementById('closeModal');
+
+grid.addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-id]');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  const item = DATA.find(x=>x.id===id);
+  if(!item) return;
+  modalImg.src = item.img;
+  modalImg.alt = item.title;
+  modalTitle.textContent = item.title;
+  modalPovo.textContent = `${item.povo} · ${item.tema}`;
+  modalDesc.textContent = item.desc;
+  modalBack.style.display='flex';
+  modalBack.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+});
+closeModal.addEventListener('click', ()=>{ closeModalFn(); });
+modalBack.addEventListener('click', (e)=>{ if(e.target===modalBack) closeModalFn(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModalFn(); });
+function closeModalFn(){ modalBack.style.display='none'; modalBack.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+
+/* filters & search */
+const chips = Array.from(document.querySelectorAll('.chip'));
+chips.forEach(c=>{
+  c.addEventListener('click', ()=>{
+    const pov = c.dataset.filterPovo;
+    const tema = c.dataset.filterTema;
+    // toggle active state only for chips that have filter data
+    if(c.dataset.filterPovo || c.dataset.filterTema){
+      c.classList.toggle('active');
+    }
+    applyFilters();
+  });
+});
+
+document.getElementById('q').addEventListener('input', applyFilters);
+
+function applyFilters(){
+  const activePovo = chips.find(ch=>ch.classList.contains('active') && ch.dataset.filterPovo)?.dataset.filterPovo || '';
+  const activeTema = chips.find(ch=>ch.classList.contains('active') && ch.dataset.filterTema)?.dataset.filterTema || '';
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const filtered = DATA.filter(d=>{
+    const matchP = !activePovo || d.povo === activePovo;
+    const matchT = !activeTema || d.tema === activeTema;
+    const matchQ = !q || (d.title.toLowerCase().includes(q) || d.desc.toLowerCase().includes(q) || d.povo.toLowerCase().includes(q));
+    return matchP && matchT && matchQ;
+  });
+  render(filtered);
+}
+
+/* clear active filters when "Todos" chip clicked */
+document.querySelectorAll('.chip[data-filter-povo=""]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    chips.forEach(c=>c.classList.remove('active'));
+    document.getElementById('q').value='';
+    render(DATA);
+  });
+});
+</script>
+</body>
+</html>
